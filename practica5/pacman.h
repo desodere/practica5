@@ -25,9 +25,6 @@ public:
     void ir_derecha();
     void ir_izquierda();
 
-
-
-
 signals:
 
 public slots:

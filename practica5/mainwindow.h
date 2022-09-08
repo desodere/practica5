@@ -3,9 +3,7 @@
 
 #include "qgraphicsscene.h"
 #include <QMainWindow>
-//#include "scene.h"
 #include "pared.h"
-#include "moob1.h"
 #include "pacman.h"
 
 
@@ -23,7 +21,7 @@ public:
     int x ;
     int y ;
     //int matriz[21][24];
-    int matriz[26][24];
+    int matriz[24][21];
     void keyPressEvent(QKeyEvent *event);
     Pacman * pacman ;
 
@@ -32,10 +30,8 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     Pared *pared[24][21];
-    moob1 *moob1;
 
-
-//    Scene *scene;
+    int puntaje;
 
 };
 #endif // MAINWINDOW_H

@@ -17,32 +17,23 @@ QRectF Pared::boundingRect() const{
 void Pared::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
        QWidget *widget){
 if(estado==1){
-    painter->setBrush(Qt::black);
+    painter->setBrush(Qt::transparent);
     painter->drawRect(boundingRect());
 }else if(estado==2){
   //  painter->setBrush(Qt::black);
    // painter->drawRect(boundingRect());
-    painter->setBrush(Qt::blue);
+    painter->setBrush(Qt::white);
     painter->drawEllipse(boundingRect().x()+15,boundingRect().y()+15,boundingRect().width()-30,boundingRect().height()-30);
-}else{
+}else if(estado==3){
+
+      painter->setBrush(Qt::white);
+      painter->drawEllipse(boundingRect().x()+10,boundingRect().y()+10,boundingRect().width()-20,boundingRect().height()-20);
+  }else{
     //painter->setBrush(Qt::white);
 }
-//painter->drawEllipse(boundingRect());
-
 }
 
-int Pared::contacto(Pacman *pac)
-{
-    int val;
-    //qDebug() << x<<" , ";
-    if(x>=pac->x()+40){
-        val=1;
-}else{
-        val=0;
-    }
 
-    return val;
-}
 
 int Pared::getEstado() const
 {

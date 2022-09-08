@@ -9,5 +9,7 @@
         <file>imagenes/pac.png</file>
         <file>imagenes/pac2.png</file>
         <file>imagenes/punto.png</file>
+        <file>imagenes/mapa2.png</file>
+        <file>imagenes/mapa3.png</file>
     </qresource>
 </RCC>

@@ -16,7 +16,7 @@ Pacman::Pacman(QPixmap pixmap):
     pacmanTimer->start(80);
 
 //    y_ubicacion = scenePos().y()+40;
-    y_ubicacion = scenePos().y()+680;
+    y_ubicacion = scenePos().y()+640;
 
     yanimacion =new QPropertyAnimation(this,"y",this);
     yanimacion->setStartValue(scenePos().y());

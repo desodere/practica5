@@ -1,6 +1,5 @@
 debug/main.o
 debug/mainwindow.o
-debug/moob1.o
 debug/pacman.o
 debug/pared.o
 debug/rectangulo.o

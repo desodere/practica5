@@ -1,6 +1,5 @@
 release/main.o
 release/mainwindow.o
-release/moob1.o
 release/pacman.o
 release/pared.o
 release/rectangulo.o

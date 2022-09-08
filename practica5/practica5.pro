@@ -11,21 +11,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    moob1.cpp \
     pacman.cpp \
-    pared.cpp \
-    rectangulo.cpp \
-    scene.cpp \
-    tablero.cpp
+    pared.cpp
 
 HEADERS += \
     mainwindow.h \
-    moob1.h \
     pacman.h \
-    pared.h \
-    rectangulo.h \
-    scene.h \
-    tablero.h
+    pared.h
 
 FORMS += \
     mainwindow.ui

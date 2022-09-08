@@ -14,17 +14,17 @@ using namespace std;
 class Pared:public QObject, public QGraphicsItem
 {
 public:
-//    Esfera(QWidget *parent = nullptr);
-//    ~Esfera();
 
     Pared(int est,float alt,float anc, float _x, float _y);
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
-
 
     int getEstado() const;
+
     void setEstado(int newEstado);
+
+    QRectF boundingRect() const;
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
 
 private:
     int estado;
@@ -34,10 +34,6 @@ private:
     float x;
     float y;
 
-signals:
-
-public slots:
-    int contacto(Pacman *pac);
 };
 
 #endif // PARED_H
