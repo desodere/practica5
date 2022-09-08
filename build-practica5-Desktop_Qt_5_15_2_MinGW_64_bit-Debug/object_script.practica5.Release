@@ -1,0 +1,13 @@
+release/main.o
+release/mainwindow.o
+release/moob1.o
+release/pacman.o
+release/pared.o
+release/rectangulo.o
+release/scene.o
+release/tablero.o
+release/qrc_resource.o
+release/moc_mainwindow.o
+release/moc_pacman.o
+release/moc_rectangulo.o
+release/moc_scene.o

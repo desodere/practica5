@@ -1,0 +1,10 @@
+1. Como hacer un mapa para un juego C++ (Face Running)
+https://www.youtube.com/watch?v=l_cojFleEvc
+
+
+[2/6]Project Setup | Flappy Bird Game with Qt C++
+https://www.youtube.com/watch?v=LkISZOsogyc
+
+
+Programación de Juegos C++ - Parte 8: Detectar colisión Nave-Asteroide 
+https://www.youtube.com/watch?v=KOJXAC_GMxc&t=491s

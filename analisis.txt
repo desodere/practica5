@@ -1,0 +1,8 @@
+Analisis 
+Practica 5: Crear el juego de Pacman
+
+Identifico:
+Crear clase para:
+Pacman
+Moobs(Usar la misma que Pacman ?)
+Tablero

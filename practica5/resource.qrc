@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/mapa.png</file>
+        <file>imagenes/rectangulo.png</file>
+        <file>imagenes/abajo.png</file>
+        <file>imagenes/arriba.png</file>
+        <file>imagenes/derecha.png</file>
+        <file>imagenes/izquierda.png</file>
+        <file>imagenes/pac.png</file>
+        <file>imagenes/pac2.png</file>
+        <file>imagenes/punto.png</file>
+    </qresource>
+</RCC>
