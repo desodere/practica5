@@ -7,6 +7,8 @@ altura = alt;
 ancho = anc;
 x = _x;
 y = _y;
+
+
 }
 
 QRectF Pared::boundingRect() const{
@@ -16,20 +18,25 @@ QRectF Pared::boundingRect() const{
 
 void Pared::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
        QWidget *widget){
+    QPen pen(Qt::blue,4);
 if(estado==1){
-    painter->setBrush(Qt::transparent);
+  //  painter->setBrush(Qt::transparent);
+    painter->setBrush(Qt::darkBlue);
+    painter->setPen(pen);
     painter->drawRect(boundingRect());
 }else if(estado==2){
-  //  painter->setBrush(Qt::black);
+    painter->setBrush(Qt::yellow);
+    painter->setPen(Qt::yellow);
    // painter->drawRect(boundingRect());
-    painter->setBrush(Qt::white);
+  //  painter->setBrush(Qt::white);
     painter->drawEllipse(boundingRect().x()+15,boundingRect().y()+15,boundingRect().width()-30,boundingRect().height()-30);
 }else if(estado==3){
-
-      painter->setBrush(Qt::white);
+      painter->setBrush(Qt::yellow);
+      painter->setPen(Qt::yellow);
+     // painter->setBrush(Qt::white);
       painter->drawEllipse(boundingRect().x()+10,boundingRect().y()+10,boundingRect().width()-20,boundingRect().height()-20);
   }else{
-    //painter->setBrush(Qt::white);
+    painter->setBrush(Qt::white);
 }
 }
 

@@ -6,9 +6,10 @@
 #include <QImage>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
-#include "pacman.h"
+//#include "pacman.h"
 #include <iostream>
 #include <QDebug>
+#include <QGraphicsEllipseItem>
 using namespace std;
 
 class Pared:public QObject, public QGraphicsItem
@@ -23,6 +24,7 @@ public:
 
     QRectF boundingRect() const;
 
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget);
 
@@ -30,7 +32,6 @@ private:
     int estado;
     float altura;
     float ancho;
-    float radio;
     float x;
     float y;
 

@@ -2,158 +2,82 @@
 #include <QTimer>
 #include <QGraphicsScene>
 
-Pacman::Pacman(QPixmap pixmap):
-    posicion(Posicion::derecha),
-    direccion(1)
+//Pacman::Pacman(QObject *parent)
+//    : QObject{parent}
+//{
+Pacman::Pacman(QPixmap pixmap)
+
 {
+    pacmanTimer_boca = new QTimer();
+    pacmanTimer_move = new QTimer();
+
     setPixmap(pixmap);
 
-    QTimer * pacmanTimer = new QTimer(this);
-    connect(pacmanTimer,&QTimer::timeout,[=](){
-        actualizarPixmap();
-    });
+  //  pixmap = new QPixmap(":/imagenes/spt1_40.png");
 
-    pacmanTimer->start(80);
+    fila = 0;
+    columna = 0;
+    ancho = 40;
+    alto = 40;
+    direccion = 1;
+    puntaje = 0;
 
-//    y_ubicacion = scenePos().y()+40;
-    y_ubicacion = scenePos().y()+640;
-
-    yanimacion =new QPropertyAnimation(this,"y",this);
-    yanimacion->setStartValue(scenePos().y());
-    yanimacion->setEndValue(y_ubicacion);
-    //yanimacion->setEasingCurve(QEasingCurve::Linear);
-    yanimacion->setDuration(1);
-
-    yanimacion->start();
-
-//    x_ubicacion = scenePos().x()+40;
-    x_ubicacion = scenePos().x()+400;
-    xanimacion =new QPropertyAnimation(this,"x",this);
-    xanimacion->setStartValue(scenePos().x());
-    xanimacion->setEndValue(x_ubicacion);
-    //yanimacion->setEasingCurve(QEasingCurve::Linear);
-    xanimacion->setDuration(1);
-
-    xanimacion->start();
+    //this->setPos(420,660);
+    setX(420);
+    setY(660);
 
 
-    yrotacion = new QPropertyAnimation(this,"rotacion",this);
 
-    //rotateTo(90,1200,QEasingCurve::Linear);
+    pacmanTimer_move->start(200);
+    pacmanTimer_boca->start(200);
+
+    connect(pacmanTimer_boca, &QTimer::timeout, this, &Pacman::Actualizacion);
+ //   connect(pacmanTimer, &QTimer::timeout, this, &Pacman::movimiento);
+    connect(pacmanTimer_move, &QTimer::timeout, this, &Pacman::regla);
+
 
 }
 
-void Pacman::actualizarPixmap()
+QRectF Pacman::boundingRect() const
+{
+    return QRectF(-ancho/2, -alto/2, ancho, alto);
+}
+
+void Pacman::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->drawPixmap(-ancho/2, -alto/2, this->pixmap(), columna, direccion*40, ancho, alto);
+}
+
+void Pacman::Actualizacion()
 {
 
-    if(direccion==1){
-        setPixmap(QPixmap(":/imagenes/pac.png"));
-        posicion = Posicion::derecha;
-        direccion = 1;
-    }else if(direccion==2){
-        setPixmap(QPixmap(":/imagenes/pac.png"));
-        posicion = Posicion::abajo;
-        direccion = 2;
-    }else if(direccion==3){
-        setPixmap(QPixmap(":/imagenes/pac.png"));
-        posicion = Posicion::izquierda;
-        direccion = 3;
-    }else if(direccion==4){
-        setPixmap(QPixmap(":/imagenes/pac.png"));
-        posicion = Posicion::arriba;
-        direccion = 4;
-    }else{
-        setPixmap(QPixmap(":/imagenes/arriba.png"));
-        posicion = Posicion::derecha;
-        direccion = 1;
+    //this->setX(pasos);
+    columna +=40;
+    if(columna>=80){
+
+        columna = 0;
+
     }
+    this->update(-ancho/2, -alto/2, ancho, alto);
 }
 
-qreal Pacman::rotacion() const
+void Pacman::movimiento(int _direccion)
 {
-    return m_rotacion;
-}
-
-void Pacman::setRotacion(qreal newRotacion)
-{
-    m_rotacion = newRotacion;
-
-    QPointF c = boundingRect().center();
-
-    QTransform t;
-    t.translate(c.x(),c.y());
-    t.rotate(newRotacion);
-    t.translate(-c.x(),-c.y());
-    setTransform(t);
-}
-
-
-void Pacman::ir_arriba()
-{
-    yanimacion->stop();
-    yrotacion->stop();
-
-    qreal curPosY = y();
-    yanimacion->setStartValue(curPosY);
-    yanimacion->setEndValue(curPosY - 40);
-    setY(curPosY - 40);
-    yanimacion->setDuration(1);
-    yanimacion->start();
-
-    yrotacion->start();
-    rotateTo(-90,0,QEasingCurve::Linear);
+//    static int cont = x();
+//    pasos+=(cont+40);
+    if(_direccion==0){
+        this->setX( x()+40);
+    }else if(_direccion==1){
+        this->setX( x()-40);
+    }else if(_direccion==2){
+        this->setY( y()-40);
+    }else if(_direccion==3){
+        this->setY( y()+40);
+    }
+//    cont+=40;
 
 }
 
-void Pacman::ir_abajo()
-{
-    yanimacion->stop();
-    yrotacion->stop();
-
-    qreal curPosY = y();
-    yanimacion->setStartValue(curPosY);
-    yanimacion->setEndValue(curPosY + 40);
-    setY(curPosY + 40);
-    yanimacion->setDuration(1);
-    yanimacion->start();
-
-    yrotacion->start();
-    rotateTo(90,0,QEasingCurve::Linear);
-
-}
-
-void Pacman::ir_derecha()
-{
-    xanimacion->stop();
-    yrotacion->stop();
-
-    qreal curPosX = x();
-    xanimacion->setStartValue(curPosX);
-    xanimacion->setEndValue(curPosX + 40);
-    setX(curPosX + 40);
-    xanimacion->setDuration(1);
-    xanimacion->start();
-
-    yrotacion->start();
-    rotateTo(0,0,QEasingCurve::Linear);
-}
-
-void Pacman::ir_izquierda()
-{
-    xanimacion->stop();
-    yrotacion->stop();
-
-    qreal curPosX = x();
-    xanimacion->setStartValue(curPosX);
-    xanimacion->setEndValue(curPosX - 40);
-    setX(curPosX - 40);
-   // yanimacion->setEasingCurve(QEasingCurve::Linear);
-    xanimacion->setDuration(1);
-    xanimacion->start();
-
-    yrotacion->start();
-    rotateTo(-180,0,QEasingCurve::Linear);
-}
 
 qreal Pacman::y() const
 {
@@ -178,14 +102,131 @@ void Pacman::setX(qreal newX)
     m_x = newX;
 }
 
-void Pacman::rotateTo(const qreal &end, const int &duracion, const QEasingCurve &curve)
-{
-    yrotacion->setStartValue(rotacion());
-    yrotacion->setEndValue(end);
-   // yrotacion->setEasingCurve(curve);
-    yrotacion->setDuration(duracion);
 
-    yrotacion->start();
+
+void Pacman::regla(){
+
+    int y2 =(x()/40)-1;
+    int x2 =((y())/40)-1;
+
+//    if  ((x()/40)>18 or ((y())/40)>20
+//         or (x()/40)<0 or ((y())/40)<0){
+    if  (y2>18 or x2>20 or y2<0 or x2<0){
+
+        if(y2>=18){
+            y2--;
+        }
+
+        if(x2>=20){
+            x2--;
+        }
+        qDebug() << "Error number: " << direccion ;
+        qDebug()  << "ry2 "<<y2;
+        qDebug()  << "rx2 "<<x2;
+    }else{
+        y2 =(x()/40);
+        x2 =((y())/40);
+        qDebug() << matriz[y2][x2] ;
+        qDebug()  << "";
+
+        if(direccion==0){
+            //derecha
+            qDebug() << "derecha ";
+            if(matriz[y2+1][x2]==0){
+                movimiento(direccion);
+
+            }else if(matriz[y2+1][x2]==2){
+
+                qDebug() << y2;
+
+                movimiento(direccion);
+                matriz[y2+1][x2]=0;
+                puntaje+=10;
+
+            }else if(matriz[y2+1][x2]==3){
+
+                movimiento(direccion);
+                //matriz[y2+1][x2]=0;
+                puntaje+=50;
+
+            }else{
+                qDebug() << "obstaculo ";
+            }
+
+        }else if(direccion==1){
+            //izquierda
+            qDebug() << "izquierda ";
+            if(matriz[y2-1][x2]==0){
+                movimiento(direccion);
+
+            }else if(matriz[y2-1][x2]==2){
+
+                qDebug() << y2;
+
+                movimiento(direccion);
+                puntaje+=10;
+
+            }else if(matriz[y2-1][x2]==3){
+
+                movimiento(direccion);
+                puntaje+=50;
+
+            }else{
+                qDebug() << "obstaculo ";
+            }
+        }else if(direccion==2){
+            //abajo
+            qDebug() << "abajo ";
+            if(matriz[y2][x2-1]==0){
+                movimiento(direccion);
+
+            }else if(matriz[y2][x2-1]==2){
+
+                qDebug() << y2;
+
+                movimiento(direccion);
+                puntaje+=10;
+
+            }else if(matriz[y2][x2-1]==3){
+
+                movimiento(direccion);
+                puntaje+=50;
+
+            }else{
+                qDebug() << "obstaculo ";
+            }
+        }else if(direccion==3){
+            //arriba
+            qDebug() << "arriba ";
+            if(matriz[y2][x2+1]==0){
+                movimiento(direccion);
+
+            }else if(matriz[y2][x2+1]==2){
+
+                qDebug() << y2;
+
+                movimiento(direccion);
+                puntaje+=10;
+
+            }else if(matriz[y2][x2+1]==3){
+
+                movimiento(direccion);
+                puntaje+=50;
+
+            }else{
+                qDebug() << "obstaculo ";
+            }
+        }
+        //direccion = 1;
+        qDebug() << "Regla ";
+    }
+    qDebug()  << "rr "<< matriz[x()/40][y()/40];
+//    y2 =(x()/40);
+//    x2 =((y())/40);
+    qDebug()  << "ry2, "<<y2;
+    qDebug()  << "rx2, "<<x2;
+
 }
+
 
 

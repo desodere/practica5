@@ -11,5 +11,11 @@
         <file>imagenes/punto.png</file>
         <file>imagenes/mapa2.png</file>
         <file>imagenes/mapa3.png</file>
+        <file>imagenes/spt1.png</file>
+        <file>imagenes/spt1_40.png</file>
+        <file>imagenes/spt1_40_2.png</file>
+        <file>imagenes/spt1_40_2_1.png</file>
+        <file>imagenes/spt1_40_0.png</file>
+        <file>imagenes/spt1_40_0_1.png</file>
     </qresource>
 </RCC>
